@@ -121,7 +121,6 @@ class login():
 
     def autenticar(self):
         #Este query es inseguro porque puede permitir una inyección SQL
-        #sql = "SELECT * FROM usuarios WHERE usuario = '" + self.usuario + "' AND contrasena = '"  + self.contrasena + "';"    
         #Para mitigar usamos comandos SQL parametrizados
         sql = "SELECT * FROM tbl_usuarios WHERE usuario = ?;"
         obj = db.ejecutar_select(sql, [ self.usuario ])

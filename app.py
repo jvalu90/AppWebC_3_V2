@@ -15,7 +15,7 @@ app.config['SECRET_KEY'] = os.urandom(32)
 
 #Decorador para verificar que el usuario es autenticado
 #Tan pronto esté listo debemos insertar en todas las vistas el decorador
-#@login_required
+#@login_required OK
 def login_required(view):
     @functools.wraps(view)
     def wrapped_view(**kwargs):
