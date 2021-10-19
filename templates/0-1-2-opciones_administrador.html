@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>RAFFLES HOTEL YACARTA - Grupo 20 Equipo 1</title>
+    <!--Este estilo puede referenciarse en todas los Mockups-->
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link rel='stylesheet' type='text/css' media='screen' href='../static/estilos/estilos.css'>
+    <script src='../static/scripts/scripts.js'></script>
+</head>
+<body>
+    <div class="container">
+      <div class="row">
+        <br>
+      </div>
+      <div class="row" id = "encabezado">
+        <h1 class="text-center">RAFFLES HOTEL YACARTA</h1>
+      </div>
+      <div class="row">
+        <h2 class="text-center">Opciones Administrador</h2>
+      </div>      
+
+     
+      <div>
+        <br>
+      </div>
+
+      <div class="row">
+        <div class="btn-group" role="group" aria-label="Basic example">
+          <!-- <a class="btn btn-outline-dark" href="0-1-2-1-consulta_datos_usuario.html" role="button">Datos de la Cuenta</a> -->
+          <a class="btn btn-outline-dark" href="{{url_for('consulta_datos_usuario_admin')}}" role="button">Datos de la Cuenta</a>
+        </div> 
+      </div>
+
+      <div>
+        <br>
+      </div>
+      
+      <div class="row">
+        <div class="btn-group" role="group" aria-label="Basic example">
+          <!-- <a class="btn btn-outline-dark" href="0-1-2-2-gestion_usuarios_finales.html" role="button">Gestión de Usuarios Finales</a> -->
+          <a class="btn btn-outline-dark" href="{{url_for('gestion_usuarios_finales_admin')}}" role="button">Gestión de Usuarios Finales</a>
+        </div> 
+      </div> 
+
+      <div>
+        <br>
+      </div>
+
+      <div class="row">
+        <div class="btn-group" role="group" aria-label="Basic example">
+          <!-- <a class="btn btn-outline-dark" href="0-1-2-3-gestion_habitaciones.html" role="button">Gestión de Habitaciones</a> -->
+          <a class="btn btn-outline-dark" href="{{url_for('gestion_habitaciones_admin')}}" role="button">Gestión de Habitaciones</a>
+        </div> 
+      </div> 
+
+      <div>
+        <br>
+      </div>
+
+      <div class="row">
+        <div class="btn-group" role="group" aria-label="Basic example">
+          <a class="btn btn-outline-dark" href="{{url_for('consulta_reservas_admin')}}" role="button">Gestión de Reservas</a>
+        </div> 
+      </div> 
+
+      <div>
+        <br>
+      </div>
+
+      <div class="row">
+        <div class="btn-group" role="group" aria-label="Basic example">
+          <!-- Christian_Comment: En la opción ir a anterior cuando el usuario esté logueado pienso que 
+            lo debe arrojar a la misma ventana de opciones de administrador y no al login, porque para ello
+            debería de cerrar la sesión. -->
+          <!-- <a class="btn btn-outline-dark" href="0-1-login.html" role="button">Ir a Anterior</a> -->
+          <!-- <a class="btn btn-outline-dark" href="{{url_for('usuario_registrado')}}" role="button">Ir a Anterior</a> -->
+          <a class="btn btn-outline-dark" href="{{url_for('usuario_registrado')}}" role="button">Ir a Anterior</a>
+          <a class="btn btn-outline-dark" href="{{url_for('inicio')}}" role="button">Ir a Inicio</a>
+          <!--<a class="btn btn-outline-dark" href="0-inicio.html" role="button">Ir a Inicio</a>-->
+          </div> 
+      </div>   
+
+    </div>
+  </body>
+</html>
