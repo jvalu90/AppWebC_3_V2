@@ -90,6 +90,10 @@ def usuario_registrado():
 
         if obj_login.autenticar() and formulario.tipoUsuario.data == "UF": 
             session.clear()
+            # Error en el login###########################################
+            objeto_login =login.cargar(formulario.user.data)
+            session['id_usuario_logueado'] = objeto_login.id_usuario
+            #############################################################3
             session["nombre_usuario"] = usr
             return redirect( url_for('registrado_UF'))
 

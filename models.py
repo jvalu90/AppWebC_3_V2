@@ -134,10 +134,10 @@ class login():
         return False        
 
     @classmethod
-    def cargar(cls, pusuario):
+    def cargar(cls, usuario):
         sql = "SELECT * FROM tbl_usuarios WHERE usuario = ? ;"
         #sql = "SELECT * FROM tbl_usuarios WHERE usuario = ? AND contrasena = ? AND tipo_usuario=? AND activo='SI';"
-        resultado = db.ejecutar_select(sql, [pusuario])
+        resultado = db.ejecutar_select(sql, [usuario])
         if resultado:
             if len(resultado)>0:
                 return cls(resultado[0]["usuario"], '********', resultado[0]["tipo_usuario"],'SI', resultado[0]["id_usuario"])
@@ -202,7 +202,9 @@ class usuario_final():
 
     def modificar(self): # Aquí falta hacer un cambio para cifrar la consulta y el ingreso de la contraseña
         sql = "UPDATE tbl_usuarios SET documento = ?, nombres = ?, contrasena = ?, tipo_usuario = ?, activo = ?, usuario = ? WHERE id_usuario = ?;"
-        afectadas = db.ejecutar_insert(sql, [ self.documento, self.nombres, self.contrasena, self.tipo_usuario, self.activo, self.usuario , self.id_usuario])
+        hashed_pwd = generate_password_hash(self.contrasena, method='pbkdf2:sha256', salt_length=32)
+        #Se ingresa la sentencia generate_password_hash para cifrar la contraseña que se envía a la base de datos
+        afectadas = db.ejecutar_insert(sql, [ self.documento, self.nombres, hashed_pwd, self.tipo_usuario, self.activo, self.usuario , self.id_usuario])
         return ( afectadas > 0 )
     
     @staticmethod
@@ -259,7 +261,9 @@ class usuario_administrador():
 
     def modificar(self):# Aquí falta hacer un cambio para cifrar la consulta y el ingreso de la contraseña
         sql = "UPDATE tbl_usuarios SET documento = ?, nombres = ?, contrasena = ?, tipo_usuario = ?, activo = ?, usuario = ? WHERE id_usuario = ?;"
-        afectadas = db.ejecutar_insert(sql, [ self.documento, self.nombres, self.contrasena, self.tipo_usuario, self.activo, self.usuario , self.id_usuario])
+        hashed_pwd = generate_password_hash(self.contrasena, method='pbkdf2:sha256', salt_length=32)
+        #Se ingresa la sentencia generate_password_hash para cifrar la contraseña que se envía a la base de datos
+        afectadas = db.ejecutar_insert(sql, [ self.documento, self.nombres, hashed_pwd, self.tipo_usuario, self.activo, self.usuario , self.id_usuario])
         return ( afectadas > 0 )
     
     @staticmethod
