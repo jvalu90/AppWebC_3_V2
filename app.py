@@ -21,9 +21,7 @@ def login_required(view):
     def wrapped_view(**kwargs):
         if g.user is None:
             return redirect( url_for('usuario_registrado') )
-
         return view(**kwargs)
-
     return wrapped_view
 
 @app.before_request
@@ -86,24 +84,24 @@ def usuario_registrado():
         usr = formulario.user.data.replace("'","")
         pwd = formulario.password.data.replace("'","")
 
+        session.clear()
+        
         obj_login = login(usr,pwd,"","","")
+        objeto_login =login.cargar(formulario.user.data)
+        session['id_usuario_logueado'] = objeto_login.id_usuario
 
         if obj_login.autenticar() and formulario.tipoUsuario.data == "UF": 
-            session.clear()
-            # Error en el login###########################################
-            objeto_login =login.cargar(formulario.user.data)
-            session['id_usuario_logueado'] = objeto_login.id_usuario
-            #############################################################3
+            # session.clear() 
             session["nombre_usuario"] = usr
             return redirect( url_for('registrado_UF'))
 
         if obj_login.autenticar() and formulario.tipoUsuario.data == "SA": 
-            session.clear()
+            # session.clear()
             session["nombre_usuario"] = usr
             return redirect( url_for('registrado_SA'))
 
         if obj_login.autenticar() and formulario.tipoUsuario.data == "A": 
-            session.clear()
+            # session.clear()
             session["nombre_usuario"] = usr
             return redirect( url_for('registrado_A'))
 
