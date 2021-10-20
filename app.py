@@ -83,8 +83,6 @@ def usuario_registrado():
 
         usr = formulario.user.data.replace("'","")
         pwd = formulario.password.data.replace("'","")
-
-        session.clear()
         
         obj_login = login(usr,pwd,"","","")
         objeto_login =login.cargar(formulario.user.data)
