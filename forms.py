@@ -310,15 +310,33 @@ class formcancelarreservasuperadmin(FlaskForm):
 
 # FIN CLASES Y FUNCIONES RELACIONADAS CON EL CRUD HABITACIONES #################################
 
-# INICIO CLASES Y FUNCIONES RELACIONADAS CON EL CRUD COMENTARIOS ###############################
+# INICIO CLASES Y FUNCIONES RELACIONADAS CON EL CRUD COMENTARIOS Y CALIFICACION #################
+
+# HTML donde deben completarse los formularios para implementar el CRUD Reservas:
+# Uusario invitado
+#0-2-2-consulta_habitaciones_disponibles
+#0-2-2-1-consulta_comentarios_habitacion
+
+# Usuario final
+# 0-1-3-2-consulta_habitaciones_disponibles_usuario_final
+# 0-1-3-2-1-consulta_comentarios_habitacion_usuario
+# 0-1-3-3-gestion_habitaciones_reservadas_usuario_final
+# 0-1-3-3-1-modificar_comentarios_habitacion
+# 0-1-3-3-2-calificar_habitaciones/101/0025
+
+# Administrador
+# 0-1-2-3-gestion_habitaciones
+# 0-1-2-3-3-consulta_comentarios_habitacion_usuario
+
+# SuperAdministrador
+# 0-1-1-4-gestion_habitaciones
+# 0-1-1-4-3-consulta_comentarios_habitacion_usuario
+# 0-1-1-5-restringir_comentarios
+# 0-1-1-4-gestion_habitaciones
 
 
-# FIN CLASES Y FUNCIONES RELACIONADAS CON EL CRUD COMENTARIOS ##################################
 
-# INICIO CLASES Y FUNCIONES RELACIONADAS CON EL CRUD CALIFICACION ##############################
-
-
-# FIN CLASES Y FUNCIONES RELACIONADAS CON EL CRUD CALIFICACION #################################
+# FIN CLASES Y FUNCIONES RELACIONADAS CON EL CRUD COMENTARIO Y CALIFICACION ####################
 
 # INICIO CLASES Y FUNCIONES RELACIONADAS CON EL CRUD USUARIOS ##################################
 # Formularios Gestion usuarios 
