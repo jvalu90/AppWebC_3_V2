@@ -306,7 +306,15 @@ class formcancelarreservasuperadmin(FlaskForm):
 # FIN CLASES Y FUNCIONES RELACIONADAS CON EL CRUD RESERVAS #####################################
 
 # INICIO CLASES Y FUNCIONES RELACIONADAS CON EL CRUD HABITACIONES ##############################
+class FormAgregarHabitacion(FlaskForm):
+    codigo = StringField('Código') 
+    enviar = SubmitField('Agregar') 
 
+class FormModificarHabitacion(FlaskForm):
+    id_habitacion = HiddenField('id_habitacion') 
+    codigo = StringField('Código') 
+    disponible= RadioField('Disponible', choices=[('SI','SI'),('NO','NO')])
+    enviar = SubmitField('Modificar') 
 
 # FIN CLASES Y FUNCIONES RELACIONADAS CON EL CRUD HABITACIONES #################################
 
