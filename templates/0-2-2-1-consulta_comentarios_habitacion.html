@@ -27,46 +27,28 @@
           <!--Aquí el XXX debe reemplazarse por la habitación que se consulte-->
         </div>        
       </div>
-      
+        
       <div class="row">
           <div class="btn-group" role="group" aria-label="Basic example">
             <a class="btn btn-outline-dark" href="{{url_for('registro_nuevo_usuario_final')}}" 
             role="button">Registro Nuevo Usuario</a> <!--Este debería ir a la derecha-->
           </div> 
       </div>
-        
-      <div class="row">
-        <div class="col">
-          <p class="text-left">Fecha Inicial</p>
-        </div> 
-        <div class="col">
-          <input type="date" class="form-control">
-        </div>       
-      </div>
-      <div class="row">
-        <div class="col">
-          <p class="text-left">Fecha Final</p>
-        </div> 
-        <div class="col">
-          <input type="date" class="form-control">
-        </div>        
-      </div>
+          
+
+
       <div class="row">
         <table class="table table-striped text-center">
           <thead>
             <tr>
-              <th scope="col">Fecha</th>
+              <th scope="col">Fecha Reserva</th>
               <th scope="col">Descripción</th>
             </tr>
           </thead>
+            
           <tbody>
             <tr>
               <td>2021-09-15</td>
-              <td>XXXXXXXXXXXXXX</td>
-            </tr>
-
-            <tr>
-              <td>2021-09-18</td>
               <td>XXXXXXXXXXXXXX</td>
             </tr>
 
@@ -74,9 +56,10 @@
         </table>
 
       </div>
+
       <div class="row">
         <div class="btn-group" role="group" aria-label="Basic example">
-          <a class="btn btn-outline-dark" href="{{url_for('registro_nuevo_usuario_final')}}" role="button">Ir a Anterior</a>
+          <a class="btn btn-outline-dark" href="{{url_for('consulta_habitacion_disponibles')}}" role="button">Ir a Anterior</a>
           <!--<a class="btn btn-outline-dark" href="0-2-2-consulta_habitaciones_disponibles.html" role="button">Ir a Anterior</a>-->
           <a class="btn btn-outline-dark" href="{{url_for('inicio')}}" role="button">Ir a Inicio</a>
           <!--<a class="btn btn-outline-dark" href="0-inicio.html" role="button">Ir a Inicio</a>-->

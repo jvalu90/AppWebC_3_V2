@@ -313,11 +313,7 @@ class FormModificarHabitacion(FlaskForm):
 # No se necesita formulario es una consulta a la base de datos de habitaciones
 
 #0-2-2-1-consulta_comentarios_habitacion
-
-
-
-
-
+# No se necesita formulario es una consulta a la base de datos
 
 # HTML donde deben completarse los formularios para implementar el CRUD Comentarios y Calificación:
 # Uusario invitado

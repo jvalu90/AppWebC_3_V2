@@ -4,7 +4,7 @@ from wtforms.validators import Length
 from forms import formcancelarreserva, formlogin, formmodificarreserva, formreservanueva, formreservas, formcancelarreserva, formreservasadmin, formreservanuevaadmin
 from forms import formreservassuperadmin, formreservanuevasuperadmin, formmodificarreservasuperadmin, formcancelarreservasuperadmin
 from forms import formmodificarreservaadmin, formcancelarreservaadmin,FormAgregarUsuarioFinalCRUD,FormModificarUsuarioFinalCRUD,FormAgregarUsuarioAdmonCRUD,FormModificarUsuarioAdmonCRUD,FormModificarUsuarioRegistrado,FormCrearUsuarioRegistrado
-from forms import FormModificarHabitacion,FormAgregarHabitacion 
+from forms import FormModificarHabitacion,FormAgregarHabitacion
 
 import os
 import functools

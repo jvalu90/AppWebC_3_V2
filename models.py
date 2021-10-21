@@ -67,6 +67,10 @@ class reservas():
         sql = "SELECT * FROM tbl_reservas WHERE id_habitacion =? AND fecha_inicial >=? AND fecha_final <=?;"
         return db.ejecutar_select(sql, [pid_habitacion, pfecha_inicial, pfecha_final ])
 
+    def listado_comentarios_habitaciones(self, pid_habitacion):
+        sql = "SELECT * FROM tbl_reservas WHERE id_habitacion =?;"
+        return db.ejecutar_select(sql, [pid_habitacion])
+
     # Se utiliza en la vista 0-1-3-4, 0-1-3-4-2/ app.py modulo_reservas, modificar reservas
     @staticmethod
     def listado_choices_habitaciones():
