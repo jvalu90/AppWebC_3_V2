@@ -15,19 +15,19 @@
 <body>
     <div class="container">
       <form method="POST" action="{{ url_for('modificar_usuario_administrador_crud')}}" novalidate>
-      <div class="row">
-        <br>
-        {{ form.id_usuario() }}  
-      </div>
-      <div class="row" id = "encabezado">
-        <h1 class="text-center">RAFFLES HOTEL YACARTA</h1>
-      </div>
-      <div class="row">
-        <h2 class="text-center">Modificar Usuario Administrador - desde SuperAdministrador</h2>
-      </div>
-      <div class="row">
-        <br>
-      </div>
+        <div class="row">
+          <br>
+          {{ form.id_usuario() }}  
+        </div>
+        <div class="row" id = "encabezado">
+          <h1 class="text-center">RAFFLES HOTEL YACARTA</h1>
+        </div>
+        <div class="row">
+          <h2 class="text-center">Modificar Usuario Administrador - desde SuperAdministrador</h2>
+        </div>
+        <div class="row">
+          <br>
+        </div>
 
         <div class="row">
           <div class="col">
@@ -70,9 +70,10 @@
               <a class="btn btn-outline-dark" href="{{url_for('gestion_usuarios_administradores')}}" role="button">Ir a Anterior</a>
               <!--<a class="btn btn-outline-dark" href="0-inicio.html" role="button">Ir a Inicio</a>-->
               <a class="btn btn-outline-dark" href="{{url_for('inicio')}}" role="button">Ir a Inicio</a>
+              <a class="btn btn-outline-dark" href="{{url_for('logout')}}" role="button">Cerrar Sesión</a>
           </div> 
-      </div>
-    </form>  
+        </div>
+      </form>  
     </div>
 </body>
 </html>

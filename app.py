@@ -33,7 +33,6 @@ def cargar_usuario_autenticado():
     else:
         g.user = login.cargar(nombre_usuario)
 
-#Falta implementar el botón cerrar sesión en todas las vistas
 @app.route("/logout/")
 @login_required
 def logout():
