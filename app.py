@@ -87,25 +87,65 @@ def usuario_registrado():
         
         obj_login = login(usr,pwd,"","","")
         objeto_login =login.cargar(formulario.user.data)
-        session['id_usuario_logueado'] = objeto_login.id_usuario
 
-        if obj_login.autenticar() and formulario.tipoUsuario.data == "UF": 
-            # session.clear() 
-            session["nombre_usuario"] = usr
-            return redirect( url_for('registrado_UF'))
+        if(objeto_login==None):
+            return render_template('0-1-login.html', mensaje="Nombre de usuario o contraseña incorrecta.", 
+            form=formulario)
+        else:
+            session['id_usuario_logueado'] = objeto_login.id_usuario
+            print(formulario.tipoUsuario.data)
+            if obj_login.autenticar() and formulario.tipoUsuario.data == "UF" and formulario.tipoUsuario.data==objeto_login.tipo_usuario: 
+                # session.clear() 
+                session["nombre_usuario"] = usr
+                return redirect( url_for('registrado_UF'))
 
-        if obj_login.autenticar() and formulario.tipoUsuario.data == "SA": 
-            # session.clear()
-            session["nombre_usuario"] = usr
-            return redirect( url_for('registrado_SA'))
+            elif obj_login.autenticar() and formulario.tipoUsuario.data == "SA" and formulario.tipoUsuario.data==objeto_login.tipo_usuario: 
+                # session.clear()
+                session["nombre_usuario"] = usr
+                return redirect( url_for('registrado_SA'))
+ 
+            elif obj_login.autenticar() and formulario.tipoUsuario.data == "A" and formulario.tipoUsuario.data==objeto_login.tipo_usuario:     
+                # session.clear()
+                session["nombre_usuario"] = usr
+                return redirect( url_for('registrado_A'))
+            else:
+                return render_template('0-1-login.html', mensaje="Nombre de usuario o contraseña incorrecta.", 
+            form=formulario)
 
-        if obj_login.autenticar() and formulario.tipoUsuario.data == "A": 
-            # session.clear()
-            session["nombre_usuario"] = usr
-            return redirect( url_for('registrado_A'))
 
-        return render_template('0-1-login.html', mensaje="Nombre de usuario o contraseña incorrecta.", 
-        form=formulario)
+# Antes de 2021-10-21 5:06 am******************************************************************************************************************
+#    if request.method =="GET":
+#            formulario =formlogin()
+#            return render_template('0-1-login.html', form=formulario)
+#        else:
+#            formulario = formlogin(request.form)
+
+#            usr = formulario.user.data.replace("'","")
+#            pwd = formulario.password.data.replace("'","")
+            
+#            obj_login = login(usr,pwd,"","","")
+#            objeto_login =login.cargar(formulario.user.data)
+#            session['id_usuario_logueado'] = objeto_login.id_usuario
+
+#            if obj_login.autenticar() and formulario.tipoUsuario.data == "UF": 
+#                # session.clear() 
+#                session["nombre_usuario"] = usr
+#                return redirect( url_for('registrado_UF'))
+
+#            if obj_login.autenticar() and formulario.tipoUsuario.data == "SA": 
+                # session.clear()
+#                session["nombre_usuario"] = usr
+#                return redirect( url_for('registrado_SA'))
+
+#            if obj_login.autenticar() and formulario.tipoUsuario.data == "A": 
+#                # session.clear()
+#                session["nombre_usuario"] = usr
+#                return redirect( url_for('registrado_A'))
+
+#            return render_template('0-1-login.html', mensaje="Nombre de usuario o contraseña incorrecta.", 
+#            form=formulario)
+
+# *********************************************************************
 
         # Código obsoleto con la implementación del Hash
         #if formulario.validate_on_submit() and formulario.tipoUsuario.data == "UF":        
