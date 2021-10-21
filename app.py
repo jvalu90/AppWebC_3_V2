@@ -15,7 +15,6 @@ app.config['SECRET_KEY'] = os.urandom(32)
 
 #Decorador para verificar que el usuario es autenticado
 #Tan pronto esté listo debemos insertar en todas las vistas el decorador
-#@login_required OK
 def login_required(view):
     @functools.wraps(view)
     def wrapped_view(**kwargs):
@@ -150,18 +149,21 @@ def usuario_registrado():
 
 
 @app.route('/0-1-3-opciones_usuario_final_registrado/', methods=['GET', 'POST'])
+@login_required
 def registrado_UF():
     if request.method =="GET":
         formulario =formlogin()
         return render_template('0-1-3-opciones_usuario_final_registrado.html', form=formulario)
 
 @app.route('/0-1-1-opciones_super_administrador/', methods=['GET', 'POST'])
+@login_required
 def registrado_SA():
     if request.method =="GET":
         formulario =formlogin()
         return render_template('0-1-1-opciones_super_administrador.html', form=formulario)
 
 @app.route('/0-1-2-opciones_administrador/', methods=['GET', 'POST'])
+@login_required
 def registrado_A():
     if request.method =="GET":
         formulario =formlogin()
@@ -172,6 +174,7 @@ def registrado_A():
 # Inicio Navegación usuario Final registrado SA **************************************************************************
 
 @app.route('/0-1-1-1-consulta_datos_usuario')
+@login_required
 def consulta_datos_usuario():
     return render_template('0-1-1-1-consulta_datos_usuario.html',lista=login.datos_usuario_logueado(session['id_usuario_logueado']))
 
@@ -180,6 +183,7 @@ def consulta_datos_usuario():
 #    return render_template('0-1-1-1-1-modificar_datos_usuario.html')    
 
 @app.route('/0-1-1-1-1-modificar_datos_usuario', methods=['GET', 'POST'])
+@login_required
 def modificar_datos_usuario_SA():
     if request.method =="GET":    
         objeto_usuario =usuario_final.cargar(session['id_usuario_logueado'])
@@ -202,10 +206,12 @@ def modificar_datos_usuario_SA():
 # Inicio Navegación Gestion de Usuarios Administradores SA **************************************************************************
 
 @app.route('/0-1-1-2-gestion_usuarios_administradores', methods=["GET"])
+@login_required
 def gestion_usuarios_administradores():
     return render_template('0-1-1-2-gestion_usuarios_administradores.html', lista=usuario_administrador.listado())
 
 @app.route('/0-1-1-2-1-agregar_usuario_administrador_crud', methods=['GET', 'POST'])
+@login_required
 def agregar_usuario_administrador_crud():
     if request.method =="GET":
         formulario =FormAgregarUsuarioAdmonCRUD()
@@ -222,6 +228,7 @@ def agregar_usuario_administrador_crud():
             return render_template('0-1-1-2-gestion_usuarios_administradores.html', lista=usuario_administrador.listado())    
 
 @app.route('/0-1-1-2-2-modificar_eliminar_usuario_administrador_crud/<id_usuario>/<accion>', methods=["GET", 'POST'])
+@login_required
 def modificar_eliminar_usuario_administrador_crud(id_usuario,accion):
     objeto_usuario =usuario_administrador.cargar(id_usuario)
     if accion=='modificar':
@@ -237,6 +244,7 @@ def modificar_eliminar_usuario_administrador_crud(id_usuario,accion):
 
 
 @app.route('/0-1-1-2-2-modificar_usuario_administrador_crud', methods=["GET", 'POST'])
+@login_required
 def modificar_usuario_administrador_crud():
     formulario =FormModificarUsuarioAdmonCRUD(request.form)
     objeto_usuario = usuario_administrador(formulario.id_usuario.data, formulario.documento.data, formulario.nombre.data, formulario.documento.data, 
@@ -250,10 +258,12 @@ def modificar_usuario_administrador_crud():
 # Inicio Navegación Gestion de Usuarios Finales SA **************************************************************************
 
 @app.route('/0-1-1-3-gestion_usuarios_finales', methods=["GET"])
+@login_required
 def gestion_usuarios_finales():
     return render_template('0-1-1-3-gestion_usuarios_finales.html', lista=usuario_final.listado())
 
 @app.route('/0-1-1-3-1-agregar_usuario_final_crud', methods=['GET', 'POST'])
+@login_required
 def agregar_usuario_final_crud():
     if request.method =="GET":
         formulario =FormAgregarUsuarioFinalCRUD()
@@ -269,6 +279,7 @@ def agregar_usuario_final_crud():
             return render_template('0-1-1-3-gestion_usuarios_finales.html', lista=usuario_final.listado())    
    
 @app.route('/0-1-1-3-2-modificar_eliminar_usuario_final_crud/<id_usuario>/<accion>', methods=["GET", 'POST'])
+@login_required
 def modificar_eliminar_usuario_final_crud(id_usuario,accion):
     objeto_usuario =usuario_final.cargar(id_usuario)
     if accion=='modificar':
@@ -283,6 +294,7 @@ def modificar_eliminar_usuario_final_crud(id_usuario,accion):
         return render_template('0-1-1-3-gestion_usuarios_finales.html', lista=usuario_final.listado())
 
 @app.route('/0-1-1-3-2-modificar_usuario_final_crud', methods=["GET", 'POST'])
+@login_required
 def modificar_usuario_final_crud():
     formulario =FormModificarUsuarioFinalCRUD(request.form)
     objeto_usuario = usuario_final(formulario.id_usuario.data, formulario.documento.data, formulario.nombre.data, formulario.documento.data, 
@@ -295,22 +307,27 @@ def modificar_usuario_final_crud():
 # Inicio Navegación Gestion de Habitaciones SA **************************************************************************
 
 @app.route('/0-1-1-4-gestion_habitaciones')
+@login_required
 def gestion_habitaciones():
     return render_template('0-1-1-4-gestion_habitaciones.html')
 
 @app.route('/0-1-1-4-1-nueva_habitacion')
+@login_required
 def nueva_habitacion():
     return render_template('0-1-1-4-1-nueva_habitacion.html')
 
 @app.route('/0-1-1-4-2-modificar_habitacion')
+@login_required
 def modificar_habitacion():
     return render_template('0-1-1-4-2-modificar_habitacion.html')
 
 @app.route('/0-1-1-4-3-consulta_comentarios_habitacion_usuario')
+@login_required
 def consulta_comentarios_habitacion_usuario_SA():
     return render_template('0-1-1-4-3-consulta_comentarios_habitacion_usuario.html')
 
 @app.route('/0-1-1-4-4-consulta_reservas', methods=['GET', 'POST'])
+@login_required
 def consulta_reservas():
     if request.method =="GET":
         formulario =formreservassuperadmin()
@@ -330,6 +347,7 @@ def consulta_reservas():
         return render_template('0-1-1-4-4-consulta_reservas.html', mensaje="Todos los campos son obligatorios.", form=formulario)
 
 @app.route('/0-1-1-4-4-1-crear_reservas', methods=['GET', 'POST'])
+@login_required
 def crear_reservas_superadmin():
     if request.method == "GET":
         formulario = formreservanuevasuperadmin()
@@ -353,6 +371,7 @@ def crear_reservas_superadmin():
         return render_template('0-1-1-4-4-1-crear_reservas.html', mensaje="Todos los campos son obligatorios", form=formulario)
 
 @app.route('/0-1-1-4-4-2-modificar_reservas/<id_reserva_modificar>', methods=['GET', 'POST'])
+@login_required
 def modificar_reservas_superadmin(id_reserva_modificar):
     if request.method == "GET":
         formulario = formmodificarreservasuperadmin()
@@ -388,6 +407,7 @@ def modificar_reservas_superadmin(id_reserva_modificar):
         return render_template('0-1-1-4-4-2-modificar_reservas.html', id_reserva=id_reserva_modificar, form=formulario, mensaje="Todos los datos son obligatorios.")
 
 @app.route('/0-1-1-4-4-3-cancelar_reservas/<id_reserva_cancelar>', methods=['GET', 'POST'])
+@login_required
 def cancelar_reservas_superadmin(id_reserva_cancelar):
     if request.method == "GET":
         formulario = formcancelarreservasuperadmin()
@@ -430,6 +450,7 @@ def cancelar_reservas_superadmin(id_reserva_cancelar):
 # Inicio Navegación Restringir comentarios SA **************************************************************************
 
 @app.route('/0-1-1-5-restringir_comentarios')
+@login_required
 def restringir_comentarios():
     return render_template('0-1-1-5-restringir_comentarios.html')
 
@@ -438,18 +459,22 @@ def restringir_comentarios():
 
 # 2021-10-10  Inicio *******************    Navegación usuario final registrado *************************************
 @app.route('/0-1-3-1-consulta_datos_usuario', methods=['GET', 'POST'])
+@login_required
 def consulta_datos_usuario_final():
     return render_template('0-1-3-1-consulta_datos_usuario.html',lista=login.datos_usuario_logueado(session['id_usuario_logueado']))
 
 @app.route('/0-1-3-opciones_usuario_final_registrado', methods=['GET', 'POST'])
+@login_required
 def consulta_opciones_usuario_final_registrado():
     return render_template('0-1-3-opciones_usuario_final_registrado.html')
 
 @app.route('/0-1-3-2-consulta_habitaciones_disponibles_usuario_final', methods=['GET', 'POST'])
+@login_required
 def consulta_habitaciones_disponibles_usuario_final():
     return render_template('0-1-3-2-consulta_habitaciones_disponibles_usuario_final.html')
 
 @app.route('/0-1-3-4-modulo_reservas', methods=['GET', 'POST'])
+@login_required
 def modulo_reservas():
     if request.method =="GET":
         formulario =formreservas()
@@ -464,6 +489,7 @@ def modulo_reservas():
         return render_template('0-1-3-4-modulo_reservas.html', mensaje="Todos los campos son obligatorios.", form=formulario)
 
 @app.route('/0-1-3-4-1-crear_reservas', methods=['GET', 'POST'])
+@login_required
 def crear_reservas():
     if request.method == "GET":
         formulario = formreservanueva()
@@ -487,6 +513,7 @@ def crear_reservas():
         return render_template('0-1-3-4-1-crear_reservas.html', mensaje="Todos los campos son obligatorios", form=formulario)
 
 @app.route('/0-1-3-4-2-modificar_reservas/<id_reserva_modificar>', methods=['GET', 'POST'])
+@login_required
 def modificar_reservas(id_reserva_modificar):
     if request.method == "GET":
         formulario = formmodificarreserva()
@@ -522,6 +549,7 @@ def modificar_reservas(id_reserva_modificar):
         return render_template('0-1-3-4-2-modificar_reservas.html', id_reserva=id_reserva_modificar, form=formulario, mensaje="Todos los datos son obligatorios.")
 
 @app.route('/0-1-3-4-3-cancelar_reservas/<id_reserva_cancelar>', methods=['GET', 'POST'])
+@login_required
 def cancelar_reservas(id_reserva_cancelar):
     if request.method == "GET":
         formulario = formcancelarreserva()
@@ -556,6 +584,7 @@ def cancelar_reservas(id_reserva_cancelar):
 #    return render_template('0-1-3-1-1-modificar_datos_usuario.html')
 
 @app.route('/0-1-3-1-1-modificar_datos_usuario', methods=['GET', 'POST'])
+@login_required
 def modificar_datos_usuario():
     if request.method =="GET":
         objeto_usuario =usuario_final.cargar(session['id_usuario_logueado'])
@@ -574,15 +603,18 @@ def modificar_datos_usuario():
         return render_template('0-1-3-1-consulta_datos_usuario.html',lista=login.datos_usuario_logueado(session['id_usuario_logueado']))
 
 @app.route('/0-1-3-2-1-consulta_comentarios_habitacion_usuario', methods=['GET', 'POST'])
+@login_required
 def consulta_comentarios_habitacion_usuario():
     return render_template('0-1-3-2-1-consulta_comentarios_habitacion_usuario.html')
 
 @app.route('/0-1-3-3-gestion_habitaciones_reservadas_usuario_final', methods=['GET', 'POST'])
+@login_required
 def gestion_habitaciones_reservadas_usuario_final():
     return render_template('0-1-3-3-gestion_habitaciones_reservadas_usuario_final.html')
 
 
 @app.route('/0-1-3-3-1-modificar_comentarios_habitacion', methods=['GET', 'POST'])
+@login_required
 def modificar_comentarios_habitacion():
     if request.method=="GET":
         return render_template('0-1-3-3-1-modificar_comentarios_habitacion.html')
@@ -591,7 +623,7 @@ def modificar_comentarios_habitacion():
         return render_template('0-1-3-3-gestion_habitaciones_reservadas_usuario_final.html',sentencia='UPDATE tbl_comentarios SET comentario="'+descripcion+ '" WHERE codigo_habitacion=101 AND codigo_reserva=101')
 
 @app.route('/0-1-3-3-2-calificar_habitaciones/<int:codigo_habitacion>/<codigo_reserva>', methods=['GET', 'POST'])
-
+@login_required
 def calificar_habitaciones(codigo_habitacion,codigo_reserva):
     if request.method =="GET":
         formulario =FormCalificarHabitacion()
@@ -668,6 +700,7 @@ def consulta_comentario_habitacion():
 
 # Primera rama de navegación de usuario administrador
 @app.route('/0-1-2-1-consulta_datos_usuario', methods=['GET', 'POST'])
+@login_required
 def consulta_datos_usuario_admin():
     return render_template('0-1-2-1-consulta_datos_usuario.html',lista=login.datos_usuario_logueado(session['id_usuario_logueado']))
 
@@ -676,6 +709,7 @@ def consulta_datos_usuario_admin():
 #    return render_template('0-1-2-1-1-modificar_datos_usuario.html')
 
 @app.route('/0-1-2-1-1-modificar_datos_usuario', methods=['GET', 'POST'])
+@login_required
 def modificar_datos_usuario_admin():
     if request.method =="GET":
         objeto_usuario =usuario_final.cargar(session['id_usuario_logueado'])
@@ -696,10 +730,12 @@ def modificar_datos_usuario_admin():
 
 # Segunda rama de navegación de usuario administrador
 @app.route('/0-1-2-2-gestion_usuarios_finales', methods=["GET"])
+@login_required
 def gestion_usuarios_finales_admin():
     return render_template('0-1-2-2-gestion_usuarios_finales.html', lista=usuario_final.listado())
 
 @app.route('/0-1-2-2-1-agregar_usuario_final_crud', methods=['GET', 'POST'])
+@login_required
 def agregar_usuario_final_crud_admin():
     if request.method =="GET":
         formulario =FormAgregarUsuarioFinalCRUD()
@@ -715,6 +751,7 @@ def agregar_usuario_final_crud_admin():
             return render_template('0-1-2-2-gestion_usuarios_finales.html', lista=usuario_final.listado())    
 
 @app.route('/0-1-2-2-2-modificar_eliminar_usuario_final_crud/<id_usuario>/<accion>', methods=["GET", 'POST'])
+@login_required
 def modificar_eliminar_usuario_final_crud_admin(id_usuario,accion):
     objeto_usuario =usuario_final.cargar(id_usuario)
     if accion=='modificar':
@@ -729,6 +766,7 @@ def modificar_eliminar_usuario_final_crud_admin(id_usuario,accion):
         return render_template('0-1-2-2-gestion_usuarios_finales.html', lista=usuario_final.listado())
 
 @app.route('/0-1-2-2-2-modificar_usuario_final_crud', methods=["GET", 'POST'])
+@login_required
 def modificar_usuario_final_crud_admin():
     formulario =FormModificarUsuarioFinalCRUD(request.form)
     objeto_usuario = usuario_final(formulario.id_usuario.data, formulario.documento.data, formulario.nombre.data, formulario.documento.data, 
@@ -738,22 +776,27 @@ def modificar_usuario_final_crud_admin():
 
 # Tercera rama de navegación usuario administrador
 @app.route('/0-1-2-3-gestion_habitaciones', methods=['GET', 'POST'])
+@login_required
 def gestion_habitaciones_admin():
     return render_template('0-1-2-3-gestion_habitaciones.html')
 
 @app.route('/0-1-2-3-1-nueva_habitacion', methods=['GET', 'POST'])
+@login_required
 def nueva_habitacion_admin():
     return render_template('0-1-2-3-1-nueva_habitacion.html')
 
 @app.route('/0-1-2-3-2-modificar_habitacion', methods=['GET', 'POST'])
+@login_required
 def modificar_habitacion_admin():
     return render_template('0-1-2-3-2-modificar_habitacion.html')
 
 @app.route('/0-1-2-3-3-consulta_comentarios_habitacion_usuario', methods=['GET', 'POST'])
+@login_required
 def consulta_comentarios_habitacion_usuario_admin():
     return render_template('0-1-2-3-3-consulta_comentarios_habitacion_usuario.html')
 
 @app.route('/0-1-2-3-4-consulta_reservas', methods=['GET', 'POST'])
+@login_required
 def consulta_reservas_admin():
     if request.method =="GET":
         formulario =formreservasadmin()
@@ -773,6 +816,7 @@ def consulta_reservas_admin():
         return render_template('0-1-2-3-4-consulta_reservas.html', mensaje="Todos los campos son obligatorios.", form=formulario)
 
 @app.route('/0-1-2-3-4-1-crear_reservas', methods=['GET', 'POST'])
+@login_required
 def crear_reservas_admin():
     if request.method == "GET":
         formulario = formreservanuevaadmin()
@@ -796,6 +840,7 @@ def crear_reservas_admin():
         return render_template('0-1-2-3-4-1-crear_reservas.html', mensaje="Todos los campos son obligatorios", form=formulario)
 
 @app.route('/0-1-2-3-4-2-modificar_reservas/<id_reserva_modificar>', methods=['GET', 'POST'])
+@login_required
 def modificar_reservas_admin(id_reserva_modificar):
     if request.method == "GET":
         formulario = formmodificarreservaadmin()
@@ -831,6 +876,7 @@ def modificar_reservas_admin(id_reserva_modificar):
         return render_template('0-1-2-3-4-2-modificar_reservas.html', id_reserva=id_reserva_modificar, form=formulario, mensaje="Todos los datos son obligatorios.")
 
 @app.route('/0-1-2-3-4-3-cancelar_reservas/<id_reserva_cancelar>', methods=['GET', 'POST'])
+@login_required
 def cancelar_reservas_admin(id_reserva_cancelar):
     if request.method == "GET":
         formulario = formcancelarreservaadmin()
