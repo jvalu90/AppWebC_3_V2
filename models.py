@@ -88,7 +88,45 @@ class reservas():
 # FIN CLASES Y FUNCIONES RELACIONADAS CON EL CRUD RESERVAS #####################################
 
 # INICIO CLASES Y FUNCIONES RELACIONADAS CON EL CRUD HABITACIONES ##############################
+class habitaciones():
+    id_habitacion=0
+    codigo=''
+    disponible='SI'
 
+    def __init__(self, pid_habitacion, pcodigo, pdisponible) -> None:
+       self.id_habitacion=pid_habitacion
+       self.codigo=pcodigo
+       self.disponible=pdisponible
+
+    @classmethod
+    def cargar(cls, pid_habitacion):
+        sql = "SELECT * FROM tbl_habitaciones WHERE id_habitacion = ?;"
+        resultado = db.ejecutar_select(sql, [ pid_habitacion ])
+        if resultado:
+            if len(resultado)>0:
+                return cls(pid_habitacion, resultado[0]["codigo_habitacion"], 
+                resultado[0]["disponible"])
+        return None
+
+    def insertar(self):
+        sql = "INSERT INTO tbl_habitaciones (codigo_habitacion,disponible) VALUES (?,?);"
+        afectadas = db.ejecutar_insert(sql, [self.codigo, self.disponible])
+        return ( afectadas > 0 )
+
+    def eliminar(self):
+        sql = "DELETE FROM tbl_habitaciones WHERE id_habitacion = ?;"
+        afectadas = db.ejecutar_insert(sql, [ self.id_habitacion ])
+        return ( afectadas > 0 )
+
+    def modificar(self): 
+        sql = "UPDATE tbl_habitaciones SET codigo_habitacion = ?, disponible = ? WHERE id_habitacion = ?;"
+        afectadas = db.ejecutar_insert(sql,[self.codigo, self.disponible, self.id_habitacion])
+        return ( afectadas > 0 )
+    
+    @staticmethod
+    def listado():
+        sql = "SELECT * FROM tbl_habitaciones ORDER BY codigo_habitacion;"
+        return db.ejecutar_select(sql, None)
 
 # FIN CLASES Y FUNCIONES RELACIONADAS CON EL CRUD HABITACIONES #################################
 
