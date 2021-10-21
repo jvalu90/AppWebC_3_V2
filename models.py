@@ -128,6 +128,11 @@ class habitaciones():
         sql = "SELECT * FROM tbl_habitaciones ORDER BY codigo_habitacion;"
         return db.ejecutar_select(sql, None)
 
+    @staticmethod
+    def listado_habitaciones():
+        sql = "SELECT * FROM tbl_habitaciones WHERE disponible = 'SI' ORDER BY id_habitacion;"
+        return db.ejecutar_select(sql, None)
+
 # FIN CLASES Y FUNCIONES RELACIONADAS CON EL CRUD HABITACIONES #################################
 
 # INICIO CLASES Y FUNCIONES RELACIONADAS CON EL CRUD COMENTARIOS ###############################

@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, session, g
 from flask.templating import render_template
 from wtforms.validators import Length
-from forms import formcancelarreserva, formlogin, FormCalificarHabitacion, formmodificarreserva, formreservanueva, formreservas, formcancelarreserva, formreservasadmin, formreservanuevaadmin
+from forms import formcancelarreserva, formlogin, formmodificarreserva, formreservanueva, formreservas, formcancelarreserva, formreservasadmin, formreservanuevaadmin
 from forms import formreservassuperadmin, formreservanuevasuperadmin, formmodificarreservasuperadmin, formcancelarreservasuperadmin
 from forms import formmodificarreservaadmin, formcancelarreservaadmin,FormAgregarUsuarioFinalCRUD,FormModificarUsuarioFinalCRUD,FormAgregarUsuarioAdmonCRUD,FormModificarUsuarioAdmonCRUD,FormModificarUsuarioRegistrado,FormCrearUsuarioRegistrado
 from forms import FormModificarHabitacion,FormAgregarHabitacion 
@@ -723,7 +723,7 @@ def registro_nuevo_usuario_final():
 
 @app.route('/0-2-2-consulta_habitaciones_disponibles', methods=['GET'])
 def consulta_habitacion_disponibles():
-    return render_template('0-2-2-consulta_habitaciones_disponibles.html')
+    return render_template('0-2-2-consulta_habitaciones_disponibles.html', lista = habitaciones.listado_habitaciones())
 
 @app.route('/0-2-2-1-consulta_comentarios_habitacion', methods=['GET'])
 def consulta_comentario_habitacion():

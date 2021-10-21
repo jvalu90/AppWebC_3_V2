@@ -14,18 +14,7 @@ class formlogin(FlaskForm):
     enviar = SubmitField('Ingresar')
 
 #Fin formulario validación en Login##########################################################
-
-#Inicio formulario validación en 0-1-3-3-2 calificar habitaciones #######################################################
-class FormCalificarHabitacion(FlaskForm):
-    calificacion = DecimalRangeField('calificacion')
-    enviar = SubmitField('Calificar') 
-#fin formulario validación en 0-1-3-3-2 calificar habitaciones #######################################################
-
    
-# Aquí se desarrollan todas las funciones que tienen que ver con la conexión de la base de datos
-# Es necesario sectorizar por tipo CRUD, las funciones anteriores, sirven para orientas pero en 
-# En varios de los html faltan los formularios, se sugiere revisar según los crud en todas las
-# visualizaciones
 
 # INICIO CLASES Y FUNCIONES RELACIONADAS CON EL CRUD RESERVAS ##################################
 
@@ -320,9 +309,19 @@ class FormModificarHabitacion(FlaskForm):
 
 # INICIO CLASES Y FUNCIONES RELACIONADAS CON EL CRUD COMENTARIOS Y CALIFICACION #################
 
-# HTML donde deben completarse los formularios para implementar el CRUD Reservas:
-# Uusario invitado
 #0-2-2-consulta_habitaciones_disponibles
+# No se necesita formulario es una consulta a la base de datos de habitaciones
+
+#0-2-2-1-consulta_comentarios_habitacion
+
+
+
+
+
+
+# HTML donde deben completarse los formularios para implementar el CRUD Comentarios y Calificación:
+# Uusario invitado
+#0-2-2-consulta_habitaciones_disponibles OK
 #0-2-2-1-consulta_comentarios_habitacion
 
 # Usuario final
