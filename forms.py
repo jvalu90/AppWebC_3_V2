@@ -27,7 +27,7 @@ class formreservas(FlaskForm):
     largo = len(listado_habitaciones)
     choices_habitaciones = ["Por favor elija una Habitación"]
     for item in range(largo):
-        choices_habitaciones.append(listado_habitaciones[item]["id_habitacion"])
+        choices_habitaciones.append(listado_habitaciones[item]["codigo_habitacion"])
     
     ######################################################################
 
@@ -46,7 +46,7 @@ class formreservanueva(FlaskForm):
     largo = len(listado_habitaciones)
     choices_habitaciones = ["Por favor elija una Habitación"]
     for item in range(largo):
-        choices_habitaciones.append(listado_habitaciones[item]["id_habitacion"])
+        choices_habitaciones.append(listado_habitaciones[item]["codigo_habitacion"])
     
     ######################################################################
 
@@ -77,7 +77,7 @@ class formmodificarreserva(FlaskForm):
     largo = len(listado_habitaciones)
     choices_habitaciones = ["Por favor elija una Habitación"]
     for item in range(largo):
-        choices_habitaciones.append(listado_habitaciones[item]["id_habitacion"])
+        choices_habitaciones.append(listado_habitaciones[item]["codigo_habitacion"])
     
     ######################################################################
     bedroom = StringField('ID Habitación', validators=[validators.required()])
@@ -109,7 +109,7 @@ class formreservasadmin(FlaskForm):
     largo = len(listado_habitaciones)
     choices_habitaciones = ["Por favor elija una Habitación"]
     for item in range(largo):
-        choices_habitaciones.append(listado_habitaciones[item]["id_habitacion"])
+        choices_habitaciones.append(listado_habitaciones[item]["codigo_habitacion"])
     
     ######################################################################
 
@@ -129,7 +129,7 @@ class formreservanuevaadmin(FlaskForm):
     largo = len(listado_habitaciones)
     choices_habitaciones = ["Por favor elija una Habitación"]
     for item in range(largo):
-        choices_habitaciones.append(listado_habitaciones[item]["id_habitacion"])
+        choices_habitaciones.append(listado_habitaciones[item]["codigo_habitacion"])
     
     ######################################################################
 
@@ -161,7 +161,7 @@ class formmodificarreservaadmin(FlaskForm):
     largo = len(listado_habitaciones)
     choices_habitaciones = ["Por favor elija una Habitación"]
     for item in range(largo):
-        choices_habitaciones.append(listado_habitaciones[item]["id_habitacion"])
+        choices_habitaciones.append(listado_habitaciones[item]["codigo_habitacion"])
     
     ######################################################################
 
@@ -194,7 +194,7 @@ class formreservassuperadmin(FlaskForm):
     largo = len(listado_habitaciones)
     choices_habitaciones = ["Por favor elija una Habitación"]
     for item in range(largo):
-        choices_habitaciones.append(listado_habitaciones[item]["id_habitacion"])
+        choices_habitaciones.append(listado_habitaciones[item]["codigo_habitacion"])
     
     ######################################################################
 
@@ -214,7 +214,7 @@ class formreservanuevasuperadmin(FlaskForm):
     largo = len(listado_habitaciones)
     choices_habitaciones = ["Por favor elija una Habitación"]
     for item in range(largo):
-        choices_habitaciones.append(listado_habitaciones[item]["id_habitacion"])
+        choices_habitaciones.append(listado_habitaciones[item]["codigo_habitacion"])
     
     ######################################################################
 
@@ -244,7 +244,7 @@ class formmodificarreservasuperadmin(FlaskForm):
     largo = len(listado_habitaciones)
     choices_habitaciones = ["Por favor elija una Habitación"]
     for item in range(largo):
-        choices_habitaciones.append(listado_habitaciones[item]["id_habitacion"])
+        choices_habitaciones.append(listado_habitaciones[item]["codigo_habitacion"])
     
     ######################################################################
 
@@ -313,7 +313,33 @@ class FormModificarHabitacion(FlaskForm):
 # No se necesita formulario es una consulta a la base de datos de habitaciones
 
 #0-2-2-1-consulta_comentarios_habitacion
-# No se necesita formulario es una consulta a la base de datos
+# No se necesita formulario es una consulta a la base de datos de reservas
+
+# 0-1-3-2-consulta_habitaciones_disponibles_usuario_final
+# No se necesita formulario es una consulta a la base de datos de habitaciones
+
+# 0-1-3-2-1-consulta_comentarios_habitacion_usuario
+# No se necesita formulario es una consulta a la base de datos de reservas
+
+# 0-1-3-3-gestion_habitaciones_reservadas_usuario_final
+# No se necesita formulario es una consulta a la base de datos de reservas
+
+# 0-1-3-3-1-modificar_comentarios_habitacion
+# 0-1-3-3-2-calificar_habitaciones/101/0025
+
+# 0-1-2-3-gestion_habitaciones 
+# Se actualiza la vista y se retira el uso
+
+# 0-1-2-3-3-consulta_comentarios_habitacion_usuario
+# Se actualiza la vista y se retira el uso
+
+# 0-1-1-4-gestion_habitaciones
+# Se actualiza la vista y se retira el uso
+
+# 0-1-1-4-3-consulta_comentarios_habitacion_usuario
+# Se actualiza la vista y se retira el uso
+
+# 0-1-1-5-restringir_comentarios
 
 # HTML donde deben completarse los formularios para implementar el CRUD Comentarios y Calificación:
 # Uusario invitado
@@ -321,21 +347,20 @@ class FormModificarHabitacion(FlaskForm):
 #0-2-2-1-consulta_comentarios_habitacion OK
 
 # Usuario final
-# 0-1-3-2-consulta_habitaciones_disponibles_usuario_final
-# 0-1-3-2-1-consulta_comentarios_habitacion_usuario
+# 0-1-3-2-consulta_habitaciones_disponibles_usuario_final OK
+# 0-1-3-2-1-consulta_comentarios_habitacion_usuario OK
 # 0-1-3-3-gestion_habitaciones_reservadas_usuario_final
 # 0-1-3-3-1-modificar_comentarios_habitacion
 # 0-1-3-3-2-calificar_habitaciones/101/0025
 
 # Administrador
-# 0-1-2-3-gestion_habitaciones
-# 0-1-2-3-3-consulta_comentarios_habitacion_usuario
+# 0-1-2-3-gestion_habitaciones OK
+# 0-1-2-3-3-consulta_comentarios_habitacion_usuario OK
 
 # SuperAdministrador
-# 0-1-1-4-gestion_habitaciones
-# 0-1-1-4-3-consulta_comentarios_habitacion_usuario
+# 0-1-1-4-gestion_habitaciones OK
+# 0-1-1-4-3-consulta_comentarios_habitacion_usuario OK
 # 0-1-1-5-restringir_comentarios
-# 0-1-1-4-gestion_habitaciones
 
 
 

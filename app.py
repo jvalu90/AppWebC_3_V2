@@ -509,10 +509,10 @@ def consulta_datos_usuario_final():
 def consulta_opciones_usuario_final_registrado():
     return render_template('0-1-3-opciones_usuario_final_registrado.html')
 
-@app.route('/0-1-3-2-consulta_habitaciones_disponibles_usuario_final', methods=['GET', 'POST'])
+@app.route('/0-1-3-2-consulta_habitaciones_disponibles_usuario_final', methods=['GET'])
 @login_required
 def consulta_habitaciones_disponibles_usuario_final():
-    return render_template('0-1-3-2-consulta_habitaciones_disponibles_usuario_final.html')
+    return render_template('0-1-3-2-consulta_habitaciones_disponibles_usuario_final.html', lista = habitaciones.listado_habitaciones())
 
 @app.route('/0-1-3-4-modulo_reservas', methods=['GET', 'POST'])
 @login_required
@@ -643,9 +643,12 @@ def modificar_datos_usuario():
         objeto_usuario.modificar()
         return render_template('0-1-3-1-consulta_datos_usuario.html',lista=login.datos_usuario_logueado(session['id_usuario_logueado']))
 
-@app.route('/0-1-3-2-1-consulta_comentarios_habitacion_usuario', methods=['GET', 'POST'])
+@app.route('/0-1-3-2-1-consulta_comentarios_habitacion_usuario/<id>', methods=['GET', 'POST'])
 @login_required
-def consulta_comentarios_habitacion_usuario():
+def consulta_comentarios_habitacion_usuario(id):
+    objeto_comentario_habitacion = reservas.listado_comentarios_habitaciones("", id)
+    if objeto_comentario_habitacion:
+        return render_template('0-1-3-2-1-consulta_comentarios_habitacion_usuario.html', lista = objeto_comentario_habitacion)
     return render_template('0-1-3-2-1-consulta_comentarios_habitacion_usuario.html')
 
 @app.route('/0-1-3-3-gestion_habitaciones_reservadas_usuario_final', methods=['GET', 'POST'])
