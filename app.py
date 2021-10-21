@@ -4,10 +4,12 @@ from wtforms.validators import Length
 from forms import formcancelarreserva, formlogin, FormCalificarHabitacion, formmodificarreserva, formreservanueva, formreservas, formcancelarreserva, formreservasadmin, formreservanuevaadmin
 from forms import formreservassuperadmin, formreservanuevasuperadmin, formmodificarreservasuperadmin, formcancelarreservasuperadmin
 from forms import formmodificarreservaadmin, formcancelarreservaadmin,FormAgregarUsuarioFinalCRUD,FormModificarUsuarioFinalCRUD,FormAgregarUsuarioAdmonCRUD,FormModificarUsuarioAdmonCRUD,FormModificarUsuarioRegistrado,FormCrearUsuarioRegistrado
+from forms import FormModificarHabitacion,FormAgregarHabitacion 
+
 import os
 import functools
 from werkzeug.utils import redirect
-from models import reservas,usuario_final,usuario_administrador,login
+from models import reservas,usuario_final,usuario_administrador,login,habitaciones
 
 app = Flask(__name__)
 
@@ -778,17 +780,49 @@ def modificar_usuario_final_crud_admin():
 @app.route('/0-1-2-3-gestion_habitaciones', methods=['GET', 'POST'])
 @login_required
 def gestion_habitaciones_admin():
-    return render_template('0-1-2-3-gestion_habitaciones.html')
+    return render_template('0-1-2-3-gestion_habitaciones.html', lista=habitaciones.listado())
+
+# **********************************************************************************************************************
 
 @app.route('/0-1-2-3-1-nueva_habitacion', methods=['GET', 'POST'])
 @login_required
 def nueva_habitacion_admin():
-    return render_template('0-1-2-3-1-nueva_habitacion.html')
+    if request.method =="GET":
+        formulario =FormAgregarHabitacion()
+        return render_template('0-1-2-3-1-nueva_habitacion.html', form=formulario)
+    else:
+        formulario =FormAgregarHabitacion(request.form)
+        objeto_habitacion = habitaciones(0, formulario.codigo.data,'SI')
+        if objeto_habitacion.insertar():   
+            return render_template('0-1-2-3-gestion_habitaciones.html', lista=habitaciones.listado())
+        else:
+            return render_template('0-1-2-3-gestion_habitaciones.html', lista=habitaciones.listado())   
 
-@app.route('/0-1-2-3-2-modificar_habitacion', methods=['GET', 'POST'])
+# *********************************************************************************************************************
+
+@app.route('/0-1-2-3-2-modificar_habitacion', methods=['POST'])
 @login_required
 def modificar_habitacion_admin():
-    return render_template('0-1-2-3-2-modificar_habitacion.html')
+    formulario = FormModificarHabitacion(request.form)
+    objeto_habitacion = habitaciones(formulario.id_habitacion.data, formulario.codigo.data, formulario.disponible.data)     
+    objeto_habitacion.modificar()
+    return render_template('0-1-2-3-gestion_habitaciones.html', lista=habitaciones.listado())  
+
+# ***********************************************************************************************************************************
+@app.route('/modificar_eliminar_habitacion_admon/<id_habitacion>/<accion>', methods=["GET", 'POST'])
+@login_required
+def modificar_eliminar_habitacion_admon(id_habitacion,accion):
+    objeto_habitacion =habitaciones.cargar(id_habitacion)
+    if accion=='modificar':
+        formulario = FormModificarHabitacion()
+        formulario.id_habitacion.data = objeto_habitacion.id_habitacion
+        formulario.codigo.data = objeto_habitacion.codigo
+        formulario.disponible.data = objeto_habitacion.disponible
+        return render_template('0-1-2-3-2-modificar_habitacion.html',form = formulario)
+    else:
+        objeto_habitacion.eliminar()
+        return render_template('0-1-2-3-gestion_habitaciones.html', lista=habitaciones.listado())
+# **************************************************************************************************************************
 
 @app.route('/0-1-2-3-3-consulta_comentarios_habitacion_usuario', methods=['GET', 'POST'])
 @login_required
