@@ -83,9 +83,9 @@ class reservas():
         sql = "SELECT * FROM tbl_usuarios ORDER BY id_usuario;"
         return db.ejecutar_select(sql, None)
 
-    def listado_reservas(self):
-        sql = "SELECT * FROM tbl_reservas WHERE id_reserva = ?;"
-        return db.ejecutar_select(sql, [self.id_reserva])
+    def listado_reservas_por_usuario(self, pid_usuario):
+        sql = "SELECT * FROM tbl_reservas WHERE id_usuario = ?;"
+        return db.ejecutar_select(sql, [pid_usuario])
 
 
 #Si se necesitan más métodos estáticos podría ser en Gestión de Habitaciones Reservadas

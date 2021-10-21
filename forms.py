@@ -349,7 +349,7 @@ class FormModificarHabitacion(FlaskForm):
 # Usuario final
 # 0-1-3-2-consulta_habitaciones_disponibles_usuario_final OK
 # 0-1-3-2-1-consulta_comentarios_habitacion_usuario OK
-# 0-1-3-3-gestion_habitaciones_reservadas_usuario_final
+# 0-1-3-3-gestion_habitaciones_reservadas_usuario_final OK
 # 0-1-3-3-1-modificar_comentarios_habitacion
 # 0-1-3-3-2-calificar_habitaciones/101/0025
 

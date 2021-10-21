@@ -651,10 +651,10 @@ def consulta_comentarios_habitacion_usuario(id):
         return render_template('0-1-3-2-1-consulta_comentarios_habitacion_usuario.html', lista = objeto_comentario_habitacion)
     return render_template('0-1-3-2-1-consulta_comentarios_habitacion_usuario.html')
 
-@app.route('/0-1-3-3-gestion_habitaciones_reservadas_usuario_final', methods=['GET', 'POST'])
+@app.route('/0-1-3-3-gestion_habitaciones_reservadas_usuario_final', methods=['GET'])
 @login_required
 def gestion_habitaciones_reservadas_usuario_final():
-    return render_template('0-1-3-3-gestion_habitaciones_reservadas_usuario_final.html')
+    return render_template('0-1-3-3-gestion_habitaciones_reservadas_usuario_final.html', lista = reservas.listado_reservas_por_usuario("", session['id_usuario_logueado']))
 
 
 @app.route('/0-1-3-3-1-modificar_comentarios_habitacion', methods=['GET', 'POST'])
