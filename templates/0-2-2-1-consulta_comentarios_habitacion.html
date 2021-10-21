@@ -45,14 +45,23 @@
               <th scope="col">Descripción</th>
             </tr>
           </thead>
-            
+
+        {% if lista %}
+          {% for item in lista %}      
           <tbody>
             <tr>
-              <td>2021-09-15</td>
-              <td>XXXXXXXXXXXXXX</td>
+              <td>{{ item.fecha_inicial }}</td>
+              <td>{{ item.comentario }}</td>
             </tr>
 
           </tbody>
+          {% endfor %}
+        
+        {% else %}
+          <tr>
+            <td colspan="2">No se encontraron comentarios relacionados en reservas con esas habitaciones</td>
+          </tr>
+        {% endif %}
         </table>
 
       </div>

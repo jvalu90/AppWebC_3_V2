@@ -725,8 +725,11 @@ def registro_nuevo_usuario_final():
 def consulta_habitacion_disponibles():
     return render_template('0-2-2-consulta_habitaciones_disponibles.html', lista = habitaciones.listado_habitaciones())
 
-@app.route('/0-2-2-1-consulta_comentarios_habitacion', methods=['GET'])
-def consulta_comentario_habitacion():
+@app.route('/0-2-2-1-consulta_comentarios_habitacion/<id>', methods=['GET'])
+def consulta_comentario_habitacion(id):
+    objeto_comentario_habitacion = reservas.listado_comentarios_habitaciones(0, id)
+    if objeto_comentario_habitacion:
+        return render_template('0-2-2-1-consulta_comentarios_habitacion.html', lista = objeto_comentario_habitacion)
     return render_template('0-2-2-1-consulta_comentarios_habitacion.html')
 
 # Fin Navegación usuario invitado  *****************************************

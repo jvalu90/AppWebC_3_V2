@@ -318,7 +318,7 @@ class FormModificarHabitacion(FlaskForm):
 # HTML donde deben completarse los formularios para implementar el CRUD Comentarios y Calificación:
 # Uusario invitado
 #0-2-2-consulta_habitaciones_disponibles OK
-#0-2-2-1-consulta_comentarios_habitacion
+#0-2-2-1-consulta_comentarios_habitacion OK
 
 # Usuario final
 # 0-1-3-2-consulta_habitaciones_disponibles_usuario_final
