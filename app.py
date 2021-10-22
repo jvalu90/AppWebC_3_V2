@@ -4,7 +4,7 @@ from wtforms.validators import Length
 from forms import formcancelarreserva, formlogin, formmodificarreserva, formreservanueva, formreservas, formcancelarreserva, formreservasadmin, formreservanuevaadmin
 from forms import formreservassuperadmin, formreservanuevasuperadmin, formmodificarreservasuperadmin, formcancelarreservasuperadmin
 from forms import formmodificarreservaadmin, formcancelarreservaadmin,FormAgregarUsuarioFinalCRUD,FormModificarUsuarioFinalCRUD,FormAgregarUsuarioAdmonCRUD,FormModificarUsuarioAdmonCRUD,FormModificarUsuarioRegistrado,FormCrearUsuarioRegistrado
-from forms import FormModificarHabitacion,FormAgregarHabitacion
+from forms import FormModificarHabitacion,FormAgregarHabitacion, FormModificarComentariosHabitacion
 
 import os
 import functools
@@ -657,25 +657,47 @@ def gestion_habitaciones_reservadas_usuario_final():
     return render_template('0-1-3-3-gestion_habitaciones_reservadas_usuario_final.html', lista = reservas.listado_reservas_por_usuario("", session['id_usuario_logueado']))
 
 
-@app.route('/0-1-3-3-1-modificar_comentarios_habitacion', methods=['GET', 'POST'])
+@app.route('/0-1-3-3-1-modificar_comentarios_habitacion/<id_comentar>', methods=['GET', 'POST'])
 @login_required
-def modificar_comentarios_habitacion():
+def modificar_comentarios_habitacion(id_comentar):
     if request.method=="GET":
-        return render_template('0-1-3-3-1-modificar_comentarios_habitacion.html')
-    else:
-        descripcion=request.form['descripcion']
-        return render_template('0-1-3-3-gestion_habitaciones_reservadas_usuario_final.html',sentencia='UPDATE tbl_comentarios SET comentario="'+descripcion+ '" WHERE codigo_habitacion=101 AND codigo_reserva=101')
+        formulario = FormModificarComentariosHabitacion()
+        objeto_reserva = reservas.cargar(id_comentar)
 
-@app.route('/0-1-3-3-2-calificar_habitaciones/<int:codigo_habitacion>/<codigo_reserva>', methods=['GET', 'POST'])
-@login_required
-def calificar_habitaciones(codigo_habitacion,codigo_reserva):
-    if request.method =="GET":
-        formulario =FormCalificarHabitacion()
-        return render_template('0-1-3-3-2-calificar_habitaciones.html', form=formulario,numero_habitacion=codigo_habitacion,numero_reserva=codigo_reserva)
+        if objeto_reserva:
+            formulario.bedroom.data = objeto_reserva.id_habitacion
+            formulario.reservation.data = objeto_reserva.id_reserva
+            formulario.comment.data = objeto_reserva.comentario
+        
+            return render_template('0-1-3-3-1-modificar_comentarios_habitacion.html', id_reserva=id_comentar, form = formulario)
     else:
-        formulario = FormCalificarHabitacion(request.form)
-        valor_calificacion=str(formulario.data['calificacion'])
-        return render_template('0-1-3-3-gestion_habitaciones_reservadas_usuario_final.html',sentencia='UPDATE tbl_calificaciones SET calificacion='+valor_calificacion+' WHERE codigo_habitacion='+ str(codigo_habitacion) +' AND codigo_reserva='+str(codigo_reserva))
+
+        formulario = FormModificarComentariosHabitacion(request.form)
+        if formulario.validate_on_submit():
+            
+            objeto_reserva = reservas.cargar(id_comentar)
+            objeto_reserva.comentario = formulario.newcomment.data
+
+            if objeto_reserva.actualizar_comentario():
+                return render_template('0-1-3-3-1-modificar_comentarios_habitacion.html',id_reserva=id_comentar, form=formulario,  
+                mensaje="Su comentario ha sido modificado.")
+            
+            else:
+                return render_template('0-1-3-3-1-modificar_comentarios_habitacion.html',id_reserva=id_comentar, form=formulario, 
+                mensaje="No se pudo actualizar el comentario en la base de datos. Por favor intentelo nuevamente.")
+
+        return render_template('0-1-3-3-1-modificar_comentarios_habitacion.html', id_reserva=id_comentar, form=formulario, mensaje="Todos los datos son obligatorios.")
+
+@app.route('/0-1-3-3-2-calificar_habitaciones', methods=['GET', 'POST'])
+@login_required
+def calificar_habitaciones():
+    if request.method =="GET":
+        #formulario =FormCalificarHabitacion()
+        return render_template('0-1-3-3-2-calificar_habitaciones.html') #form=formulario,numero_habitacion=codigo_habitacion,numero_reserva=codigo_reserva)
+    else:
+        #formulario = FormCalificarHabitacion(request.form)
+        #valor_calificacion=str(formulario.data['calificacion'])
+        return render_template('0-1-3-3-gestion_habitaciones_reservadas_usuario_final.html')#,sentencia='UPDATE tbl_calificaciones SET calificacion='+valor_calificacion+' WHERE codigo_habitacion='+ str(codigo_habitacion) +' AND codigo_reserva='+str(codigo_reserva))
 
 # Templates con ruteos actualizados al Git
 # 0-1-3-opciones_usuario_final_registrado (ok)

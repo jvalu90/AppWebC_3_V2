@@ -325,6 +325,14 @@ class FormModificarHabitacion(FlaskForm):
 # No se necesita formulario es una consulta a la base de datos de reservas
 
 # 0-1-3-3-1-modificar_comentarios_habitacion
+
+class FormModificarComentariosHabitacion(FlaskForm):
+    bedroom = StringField('ID Habitación', validators=[validators.required()])
+    reservation = StringField('ID Reserva', validators=[validators.required()])
+    comment = TextAreaField('Comentario Hospedaje Previo', validators=[validators.required(), validators.length(max=200)]) 
+    newcomment = TextAreaField('Nuevo Comentario Hospedaje', validators=[validators.required(), validators.length(max=200)]) 
+    modifycomment = SubmitField('Modificar Comentario') 
+
 # 0-1-3-3-2-calificar_habitaciones/101/0025
 
 # 0-1-2-3-gestion_habitaciones 
