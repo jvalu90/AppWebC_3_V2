@@ -65,7 +65,10 @@ class reservas():
         sql = "UPDATE tbl_reservas SET comentario = ? WHERE id_reserva = ?;"
         afectadas = db.ejecutar_insert(sql, [ self.comentario, self.id_reserva ])
         return ( afectadas > 0 ) 
-
+    
+    def calificar_reserva(self):
+        sql =  "UPDATE tbl_reservas SET calificacion=? WHERE id_reserva=?"
+        return db.ejecutar_insert(sql, [self.calificacion ,self.id_reserva])
     
     # Se utiliza en la vista 0-1-3-4 / app.py modulo_reservas
     def listado(self, pid_habitacion, pfecha_inicial, pfecha_final):

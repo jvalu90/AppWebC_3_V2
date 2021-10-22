@@ -4,7 +4,7 @@ from wtforms.validators import Length
 from forms import formcancelarreserva, formlogin, formmodificarreserva, formreservanueva, formreservas, formcancelarreserva, formreservasadmin, formreservanuevaadmin
 from forms import formreservassuperadmin, formreservanuevasuperadmin, formmodificarreservasuperadmin, formcancelarreservasuperadmin
 from forms import formmodificarreservaadmin, formcancelarreservaadmin,FormAgregarUsuarioFinalCRUD,FormModificarUsuarioFinalCRUD,FormAgregarUsuarioAdmonCRUD,FormModificarUsuarioAdmonCRUD,FormModificarUsuarioRegistrado,FormCrearUsuarioRegistrado
-from forms import FormModificarHabitacion,FormAgregarHabitacion, FormModificarComentariosHabitacion
+from forms import FormModificarHabitacion,FormAgregarHabitacion, FormModificarComentariosHabitacion, FormCalificarHabitaciones
 
 import os
 import functools
@@ -688,16 +688,39 @@ def modificar_comentarios_habitacion(id_comentar):
 
         return render_template('0-1-3-3-1-modificar_comentarios_habitacion.html', id_reserva=id_comentar, form=formulario, mensaje="Todos los datos son obligatorios.")
 
-@app.route('/0-1-3-3-2-calificar_habitaciones', methods=['GET', 'POST'])
+
+
+@app.route('/0-1-3-3-2-calificar_habitaciones/<id_calificar>', methods=['GET', 'POST'])
 @login_required
-def calificar_habitaciones():
-    if request.method =="GET":
-        #formulario =FormCalificarHabitacion()
-        return render_template('0-1-3-3-2-calificar_habitaciones.html') #form=formulario,numero_habitacion=codigo_habitacion,numero_reserva=codigo_reserva)
+def calificar_habitaciones(id_calificar):
+
+    if request.method=="GET":
+        formulario = FormCalificarHabitaciones()
+        objeto_reserva = reservas.cargar(id_calificar)
+
+        if objeto_reserva:
+            formulario.bedroom.data = objeto_reserva.id_habitacion
+            formulario.reservation.data = objeto_reserva.id_reserva
+        
+            return render_template('0-1-3-3-2-calificar_habitaciones.html', id_reserva=id_calificar, form = formulario)
     else:
-        #formulario = FormCalificarHabitacion(request.form)
-        #valor_calificacion=str(formulario.data['calificacion'])
-        return render_template('0-1-3-3-gestion_habitaciones_reservadas_usuario_final.html')#,sentencia='UPDATE tbl_calificaciones SET calificacion='+valor_calificacion+' WHERE codigo_habitacion='+ str(codigo_habitacion) +' AND codigo_reserva='+str(codigo_reserva))
+
+        formulario = FormCalificarHabitaciones(request.form)
+        if formulario.validate_on_submit():
+            
+            objeto_reserva = reservas.cargar(id_calificar)
+            objeto_reserva.calificacion = str(round(formulario.calification.data, 2))
+
+            if objeto_reserva.calificar_reserva():
+                return render_template('0-1-3-3-2-calificar_habitaciones.html',id_reserva=id_calificar, form=formulario,  
+                mensaje="Su calificación se ha realizado.")
+            
+            else:
+                return render_template('0-1-3-3-2-calificar_habitaciones.html',id_reserva=id_calificar, form=formulario, 
+                mensaje="No se pudo actualizar la calificación en la base de datos. Por favor intentelo nuevamente.")
+
+        return render_template('0-1-3-3-2-calificar_habitaciones.html', id_reserva=id_calificar, form=formulario, mensaje="Todos los datos son obligatorios.")
+
 
 # Templates con ruteos actualizados al Git
 # 0-1-3-opciones_usuario_final_registrado (ok)

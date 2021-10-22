@@ -333,8 +333,13 @@ class FormModificarComentariosHabitacion(FlaskForm):
     newcomment = TextAreaField('Nuevo Comentario Hospedaje', validators=[validators.required(), validators.length(max=200)]) 
     modifycomment = SubmitField('Modificar Comentario') 
 
-# 0-1-3-3-2-calificar_habitaciones/101/0025
+# 0-1-3-3-2-calificar_habitaciones
 
+class FormCalificarHabitaciones(FlaskForm):
+    bedroom = StringField('ID Habitación', validators=[validators.required()])
+    reservation = StringField('ID Reserva', validators=[validators.required()])
+    calification = DecimalRangeField('Calificación Reserva', validators=[validators.required()])
+    send = SubmitField('Calificar Reserva')
 # 0-1-2-3-gestion_habitaciones 
 # Se actualiza la vista y se retira el uso
 
@@ -348,6 +353,7 @@ class FormModificarComentariosHabitacion(FlaskForm):
 # Se actualiza la vista y se retira el uso
 
 # 0-1-1-5-restringir_comentarios
+# Se retira la funcionalidad, no aporta al Enunciado
 
 # HTML donde deben completarse los formularios para implementar el CRUD Comentarios y Calificación:
 # Uusario invitado
@@ -358,8 +364,8 @@ class FormModificarComentariosHabitacion(FlaskForm):
 # 0-1-3-2-consulta_habitaciones_disponibles_usuario_final OK
 # 0-1-3-2-1-consulta_comentarios_habitacion_usuario OK
 # 0-1-3-3-gestion_habitaciones_reservadas_usuario_final OK
-# 0-1-3-3-1-modificar_comentarios_habitacion
-# 0-1-3-3-2-calificar_habitaciones/101/0025
+# 0-1-3-3-1-modificar_comentarios_habitacion OK
+# 0-1-3-3-2-calificar_habitaciones OK
 
 # Administrador
 # 0-1-2-3-gestion_habitaciones OK
@@ -368,7 +374,7 @@ class FormModificarComentariosHabitacion(FlaskForm):
 # SuperAdministrador
 # 0-1-1-4-gestion_habitaciones OK
 # 0-1-1-4-3-consulta_comentarios_habitacion_usuario OK
-# 0-1-1-5-restringir_comentarios
+# 0-1-1-5-restringir_comentarios OK
 
 
 
