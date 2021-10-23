@@ -53,8 +53,8 @@
                 <tr>
                   <td>{{ item.codigo_habitacion }}</td>  
                   <td>{{ item.disponible }}</td>
-                  <td><a class="btn btn-light" href="{{url_for('modificar_eliminar_habitacion_admon',id_habitacion=item.id_habitacion,accion='modificar')}}" role="button">Modificar</a></td>
-                  <td><a class="btn btn-light" href="{{url_for('modificar_eliminar_habitacion_admon',id_habitacion=item.id_habitacion,accion='eliminar')}}" role="button">Borrar</a></td>
+                  <td><a class="btn btn-light" href="{{url_for('modificar_habitacion',id_habitacion=item.id_habitacion,rol='A')}}" role="button">Modificar</a></td>
+                  <td><a class="btn btn-light" href="{{url_for('eliminar_habitacion',id_habitacion=item.id_habitacion,rol='A')}}" role="button">Borrar</a></td>
                 </tr>
               {% endfor %}
             {% endif %}    
