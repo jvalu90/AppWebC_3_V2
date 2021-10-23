@@ -152,15 +152,6 @@ class habitaciones():
 
 # FIN CLASES Y FUNCIONES RELACIONADAS CON EL CRUD HABITACIONES #################################
 
-# INICIO CLASES Y FUNCIONES RELACIONADAS CON EL CRUD COMENTARIOS ###############################
-
-
-# FIN CLASES Y FUNCIONES RELACIONADAS CON EL CRUD COMENTARIOS ##################################
-
-# INICIO CLASES Y FUNCIONES RELACIONADAS CON EL CRUD CALIFICACION ##############################
-
-
-# FIN CLASES Y FUNCIONES RELACIONADAS CON EL CRUD CALIFICACION #################################
 
 # INICIO CLASES Y FUNCIONES RELACIONADAS CON EL CRUD USUARIOS ##################################
 

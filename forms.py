@@ -27,7 +27,7 @@ class formreservas(FlaskForm):
     largo = len(listado_habitaciones)
     choices_habitaciones = ["Por favor elija una Habitación"]
     for item in range(largo):
-        choices_habitaciones.append(listado_habitaciones[item]["codigo_habitacion"])
+        choices_habitaciones.append(listado_habitaciones[item]["id_habitacion"])
     
     ######################################################################
 
@@ -46,7 +46,7 @@ class formreservanueva(FlaskForm):
     largo = len(listado_habitaciones)
     choices_habitaciones = ["Por favor elija una Habitación"]
     for item in range(largo):
-        choices_habitaciones.append(listado_habitaciones[item]["codigo_habitacion"])
+        choices_habitaciones.append(listado_habitaciones[item]["id_habitacion"])
     
     ######################################################################
 
@@ -77,7 +77,7 @@ class formmodificarreserva(FlaskForm):
     largo = len(listado_habitaciones)
     choices_habitaciones = ["Por favor elija una Habitación"]
     for item in range(largo):
-        choices_habitaciones.append(listado_habitaciones[item]["codigo_habitacion"])
+        choices_habitaciones.append(listado_habitaciones[item]["id_habitacion"])
     
     ######################################################################
     bedroom = StringField('ID Habitación', validators=[validators.required()])
@@ -109,7 +109,7 @@ class formreservasadmin(FlaskForm):
     largo = len(listado_habitaciones)
     choices_habitaciones = ["Por favor elija una Habitación"]
     for item in range(largo):
-        choices_habitaciones.append(listado_habitaciones[item]["codigo_habitacion"])
+        choices_habitaciones.append(listado_habitaciones[item]["id_habitacion"])
     
     ######################################################################
 
@@ -129,7 +129,7 @@ class formreservanuevaadmin(FlaskForm):
     largo = len(listado_habitaciones)
     choices_habitaciones = ["Por favor elija una Habitación"]
     for item in range(largo):
-        choices_habitaciones.append(listado_habitaciones[item]["codigo_habitacion"])
+        choices_habitaciones.append(listado_habitaciones[item]["id_habitacion"])
     
     ######################################################################
 
@@ -161,7 +161,7 @@ class formmodificarreservaadmin(FlaskForm):
     largo = len(listado_habitaciones)
     choices_habitaciones = ["Por favor elija una Habitación"]
     for item in range(largo):
-        choices_habitaciones.append(listado_habitaciones[item]["codigo_habitacion"])
+        choices_habitaciones.append(listado_habitaciones[item]["id_habitacion"])
     
     ######################################################################
 
@@ -194,7 +194,7 @@ class formreservassuperadmin(FlaskForm):
     largo = len(listado_habitaciones)
     choices_habitaciones = ["Por favor elija una Habitación"]
     for item in range(largo):
-        choices_habitaciones.append(listado_habitaciones[item]["codigo_habitacion"])
+        choices_habitaciones.append(listado_habitaciones[item]["id_habitacion"])
     
     ######################################################################
 
@@ -214,7 +214,7 @@ class formreservanuevasuperadmin(FlaskForm):
     largo = len(listado_habitaciones)
     choices_habitaciones = ["Por favor elija una Habitación"]
     for item in range(largo):
-        choices_habitaciones.append(listado_habitaciones[item]["codigo_habitacion"])
+        choices_habitaciones.append(listado_habitaciones[item]["id_habitacion"])
     
     ######################################################################
 
@@ -244,7 +244,7 @@ class formmodificarreservasuperadmin(FlaskForm):
     largo = len(listado_habitaciones)
     choices_habitaciones = ["Por favor elija una Habitación"]
     for item in range(largo):
-        choices_habitaciones.append(listado_habitaciones[item]["codigo_habitacion"])
+        choices_habitaciones.append(listado_habitaciones[item]["id_habitacion"])
     
     ######################################################################
 

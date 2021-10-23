@@ -50,7 +50,7 @@ def logout():
 def inicio():
     return render_template('0-inicio.html') 
 
-@app.route('/0-2-opciones_invitado/', methods=['GET', 'POST'])
+@app.route('/0-2-opciones_invitado/', methods=['GET'])
 def opciones_invitado():
     return render_template('0-2-opciones_invitado.html')
 
@@ -362,7 +362,7 @@ def modificar_usuario_final_crud():
 #def modificar_habitacion():
 #    return render_template('0-1-1-4-2-modificar_habitacion.html')
 
-@app.route('/0-1-1-4-gestion_habitaciones', methods=['GET', 'POST'])
+@app.route('/0-1-1-4-gestion_habitaciones', methods=['GET'])
 @login_required
 def gestion_habitaciones():
     return render_template('0-1-1-4-gestion_habitaciones.html', lista=habitaciones.listado())
@@ -509,10 +509,10 @@ def cancelar_reservas_superadmin(id_reserva_cancelar):
 
 # Inicio Navegación Restringir comentarios SA **************************************************************************
 
-@app.route('/0-1-1-5-restringir_comentarios')
-@login_required
-def restringir_comentarios():
-    return render_template('0-1-1-5-restringir_comentarios.html')
+#@app.route('/0-1-1-5-restringir_comentarios')
+#@login_required
+#def restringir_comentarios():
+#    return render_template('0-1-1-5-restringir_comentarios.html')
 
 # Fin Navegación Restringir comentarios SA *************************************
 
