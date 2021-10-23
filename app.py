@@ -347,21 +347,40 @@ def modificar_usuario_final_crud():
  
 # Inicio Navegación Gestion de Habitaciones SA **************************************************************************
 
-@app.route('/0-1-1-4-gestion_habitaciones')
+#@app.route('/0-1-1-4-gestion_habitaciones')
+#@login_required
+#def gestion_habitaciones():
+#    return render_template('0-1-1-4-gestion_habitaciones.html')
+
+#@app.route('/0-1-1-4-1-nueva_habitacion')
+#@login_required
+#def nueva_habitacion():
+#    return render_template('0-1-1-4-1-nueva_habitacion.html')
+
+#@app.route('/0-1-1-4-2-modificar_habitacion')
+#@login_required
+#def modificar_habitacion():
+#    return render_template('0-1-1-4-2-modificar_habitacion.html')
+
+@app.route('/0-1-1-4-gestion_habitaciones', methods=['GET', 'POST'])
 @login_required
 def gestion_habitaciones():
-    return render_template('0-1-1-4-gestion_habitaciones.html')
+    return render_template('0-1-1-4-gestion_habitaciones.html', lista=habitaciones.listado())
 
-@app.route('/0-1-1-4-1-nueva_habitacion')
+@app.route('/0-1-1-4-1-nueva_habitacion', methods=['GET', 'POST'])
 @login_required
 def nueva_habitacion():
-    return render_template('0-1-1-4-1-nueva_habitacion.html')
-
-@app.route('/0-1-1-4-2-modificar_habitacion')
-@login_required
-def modificar_habitacion():
-    return render_template('0-1-1-4-2-modificar_habitacion.html')
-
+    if request.method =="GET":
+        formulario =FormAgregarHabitacion()
+        return render_template('0-1-1-4-1-nueva_habitacion.html', form=formulario)
+    else:
+        formulario =FormAgregarHabitacion(request.form)
+        objeto_habitacion = habitaciones(0, formulario.codigo.data,'SI')
+        if objeto_habitacion.insertar():   
+            return render_template('0-1-1-4-gestion_habitaciones.html', lista=habitaciones.listado())
+        else:
+            return render_template('0-1-1-4-gestion_habitaciones.html', lista=habitaciones.listado())   
+        
 @app.route('/0-1-1-4-3-consulta_comentarios_habitacion_usuario')
 @login_required
 def consulta_comentarios_habitacion_usuario_SA():
@@ -867,6 +886,8 @@ def modificar_usuario_final_crud_admin():
     return render_template('0-1-2-2-gestion_usuarios_finales.html', lista=usuario_final.listado())
 
 # Tercera rama de navegación usuario administrador
+
+
 @app.route('/0-1-2-3-gestion_habitaciones', methods=['GET', 'POST'])
 @login_required
 def gestion_habitaciones_admin():
@@ -890,28 +911,47 @@ def nueva_habitacion_admin():
 
 # *********************************************************************************************************************
 
-@app.route('/0-1-2-3-2-modificar_habitacion', methods=['POST'])
+@app.route('/0-1-2-3-2-modificar_habitacion', methods=['GET', 'POST'])
 @login_required
 def modificar_habitacion_admin():
     formulario = FormModificarHabitacion(request.form)
     objeto_habitacion = habitaciones(formulario.id_habitacion.data, formulario.codigo.data, formulario.disponible.data)     
     objeto_habitacion.modificar()
-    return render_template('0-1-2-3-gestion_habitaciones.html', lista=habitaciones.listado())  
+    rol=formulario.rol.data
+    if rol=="A":
+        return render_template('0-1-2-3-gestion_habitaciones.html', lista=habitaciones.listado())  
+    else:
+        return render_template('0-1-1-4-gestion_habitaciones.html', lista=habitaciones.listado())  
 
 # ***********************************************************************************************************************************
-@app.route('/modificar_eliminar_habitacion_admon/<id_habitacion>/<accion>', methods=["GET", 'POST'])
+
+@app.route('/modificar_habitacion/<id_habitacion>/<rol>',methods=['GET'])
 @login_required
-def modificar_eliminar_habitacion_admon(id_habitacion,accion):
+def modificar_habitacion(id_habitacion,rol):
     objeto_habitacion =habitaciones.cargar(id_habitacion)
-    if accion=='modificar':
-        formulario = FormModificarHabitacion()
-        formulario.id_habitacion.data = objeto_habitacion.id_habitacion
-        formulario.codigo.data = objeto_habitacion.codigo
-        formulario.disponible.data = objeto_habitacion.disponible
+    formulario = FormModificarHabitacion()
+    formulario.id_habitacion.data = objeto_habitacion.id_habitacion
+    formulario.codigo.data = objeto_habitacion.codigo
+    formulario.disponible.data = objeto_habitacion.disponible
+    formulario.rol.data = rol
+    if rol=="A":
         return render_template('0-1-2-3-2-modificar_habitacion.html',form = formulario)
     else:
-        objeto_habitacion.eliminar()
+        return render_template('0-1-1-4-2-modificar_habitacion.html',form = formulario)     
+ #**************************************************************************************************************************
+
+@app.route('/eliminar_habitacion/<id_habitacion>/<rol>', methods=['GET','POST'])
+@login_required
+def eliminar_habitacion(id_habitacion,rol):
+    objeto_habitacion =habitaciones.cargar(id_habitacion)
+    objeto_habitacion.eliminar()
+    if rol=="A":
         return render_template('0-1-2-3-gestion_habitaciones.html', lista=habitaciones.listado())
+    else:
+        return render_template('0-1-1-4-gestion_habitaciones.html', lista=habitaciones.listado())
+
+# **************************************************************************************************************************
+
 # **************************************************************************************************************************
 
 @app.route('/0-1-2-3-3-consulta_comentarios_habitacion_usuario', methods=['GET', 'POST'])
