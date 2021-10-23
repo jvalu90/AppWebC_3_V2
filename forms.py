@@ -301,6 +301,7 @@ class FormAgregarHabitacion(FlaskForm):
 
 class FormModificarHabitacion(FlaskForm):
     id_habitacion = HiddenField('id_habitacion') 
+    rol = HiddenField('rol') 
     codigo = StringField('Código') 
     disponible= RadioField('Disponible', choices=[('SI','SI'),('NO','NO')])
     enviar = SubmitField('Modificar') 
